@@ -46,3 +46,6 @@
   #root, #__next {
     isolation: isolate;
   }
+html, body {
+  overscroll-behavior: none;
+}
