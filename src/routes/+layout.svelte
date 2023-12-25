@@ -29,13 +29,6 @@
 
 <div id="themeSetter" class="{theme}" />
 
-<select on:change={themeChange} title="Choose theme">
-    <!-- excuse the ugly code -->
-    <option value="darkTheme" selected={data.theme==="darkTheme"}>Dark</option>
-    <option value="lightTheme" selected={data.theme==="lightTheme"}>Light</option>
-    <option value="systemTheme" selected={data.theme==="systemTheme"}>System</option>
-</select>
-
 <slot />
 
 <style>
