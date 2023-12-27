@@ -2,6 +2,7 @@
     import Modal from "$lib/Modal.svelte";
     import { houses } from "$lib/store";
     import HousesSection from "$lib/HousesSection.svelte";
+    import { onMount } from "svelte";
 
     let addHouseModal = false;
     let newHouseName = "";
@@ -28,8 +29,18 @@
         window.localStorage.setItem("houses", JSON.stringify($houses));
         console.log("saved");
     }
-</script>
 
+    onMount(() => {
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(window.localStorage.getItem("houses")!);
+        var dlAnchorElem = document.getElementById('downloadAnchorElem');
+        if (dlAnchorElem) {
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "houses.json");
+            // dlAnchorElem.click();
+        }
+    });
+</script>
+<a id="downloadAnchorElem">Download Json</a>
 <HousesSection on:addHouse={() => addHouseModal = true} on:save={save} />
 
 {#if addHouseModal}

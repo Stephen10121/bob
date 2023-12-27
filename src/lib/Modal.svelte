@@ -45,25 +45,23 @@
         mouseDown = false;
 
         let modTop = modal.getBoundingClientRect().top;
-        transition = true;
         if (modTop < 100) {
+            transition = true;
             topmodal = "20px";
             setTimeout(() => {transition=false}, speedMS);
         } else {
-            topmodal = "100%";
-            setTimeout(() => {
-                transition=false;
-                dispatch("close");
-            }, speedMS);
+            close();
         }
     }
 
     function close() {
         transition = true;
         topmodal = "100%";
+        window.navigator.vibrate(100);
         setTimeout(() => {
             transition=false;
             dispatch("close");
+            window.navigator.vibrate(0);
         }, speedMS);
     }
 </script>
