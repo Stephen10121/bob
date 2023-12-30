@@ -89,6 +89,10 @@
 </section>
 
 <style>
+    :global(body) {
+        overflow: hidden !important;
+    }
+
     section {
         outline: 2px solid var(--secondary);
         width: 100vw;
