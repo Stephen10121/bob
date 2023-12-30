@@ -6,6 +6,7 @@
     export let header = "";
     export let forceClose = false;
 
+    let open = true;
     let diff = 0;
     let topmodal = "20px";
     let mouseDown = false;
@@ -55,6 +56,7 @@
     }
 
     function close() {
+        open = false;
         transition = true;
         topmodal = "100%";
         window.navigator.vibrate(100);
@@ -66,7 +68,7 @@
     }
 </script>
 
-<section bind:this={modal} style="top:{topmodal};--speed:{speedMS}ms" class="{transition ? "transition" : ""}">
+<section bind:this={modal} style="--overflow:{open ? "hidden" : "auto"};top:{topmodal};--speed:{speedMS}ms" class="{transition ? "transition" : ""}">
     <header>
         <h2>{header}</h2>
         <button on:click={close} title="Close Modal">
@@ -90,7 +92,7 @@
 
 <style>
     :global(body) {
-        overflow: hidden !important;
+        overflow: var(--overflow);
     }
 
     section {
