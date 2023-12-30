@@ -51,15 +51,9 @@
             <p class="disclaimer">*By adding the house, you set the arrival time as well.</p>
         </section>
     </Modal>
-{:else}
-    <div id="bob" />
 {/if}
 
 <style>
-    :global(body:has(#bob)) {
-        overflow: auto !important;
-    }
-
     p {
         font-family: var(--font);
     }
