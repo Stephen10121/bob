@@ -3,6 +3,7 @@
     import { houses } from "$lib/store";
     import HousesSection from "$lib/HousesSection.svelte";
     import { onMount } from "svelte";
+    import { Drawer } from "slider-upper";
 
     let addHouseModal = false;
     let newHouseName = "";
@@ -39,6 +40,8 @@
             // dlAnchorElem.click();
         }
     });
+
+    let showDrawer = false;
 </script>
 <a id="downloadAnchorElem">Download Json</a>
 <HousesSection on:addHouse={() => addHouseModal = true} on:save={save} />
@@ -52,6 +55,13 @@
         </section>
     </Modal>
 {/if}
+
+{#if showDrawer}
+    <Drawer on:close={() => showDrawer=false} showHeaderBar>
+        <p>Testing a new drawer</p>
+    </Drawer>
+{/if}
+<button on:click={() => showDrawer=true}>Test Drawer</button>
 
 <style>
     p {
