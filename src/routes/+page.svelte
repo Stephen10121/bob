@@ -4,6 +4,7 @@
     import HousesSection from "$lib/HousesSection.svelte";
     import { onMount } from "svelte";
     import { Drawer } from "slider-upper";
+    import Song from "$lib/Song.svelte";
 
     let addHouseModal = false;
     let newHouseName = "";
@@ -40,28 +41,21 @@
             // dlAnchorElem.click();
         }
     });
-
-    let showDrawer = false;
 </script>
 <a id="downloadAnchorElem">Download Json</a>
 <HousesSection on:addHouse={() => addHouseModal = true} on:save={save} />
 
 {#if addHouseModal}
-    <Modal on:close={() => addHouseModal=false} header="New House" forceClose={songClose}>
+    <Drawer on:close={() => addHouseModal=false} showHeaderBar closeDrawer={songClose}>
+    <!-- <Modal on:close={() => addHouseModal=false} header="New House" forceClose={songClose}> -->
         <section>
             <input type="text" placeholder="House Name" bind:value={newHouseName} />
             <button on:click={addHouse}>Add House</button>
             <p class="disclaimer">*By adding the house, you set the arrival time as well.</p>
         </section>
-    </Modal>
-{/if}
-
-{#if showDrawer}
-    <Drawer on:close={() => showDrawer=false} showHeaderBar>
-        <p>Testing a new drawer</p>
+    <!-- </Modal> -->
     </Drawer>
 {/if}
-<button on:click={() => showDrawer=true}>Test Drawer</button>
 
 <style>
     p {
