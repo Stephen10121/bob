@@ -15,8 +15,8 @@ devDependencies:
     specifier: ^3.0.0
     version: 3.0.1(svelte@4.2.8)(vite@5.0.10)
   slider-upper:
-    specifier: ^0.0.4
-    version: 0.0.4(svelte@4.2.8)
+    specifier: ^0.0.5
+    version: 0.0.5(svelte@4.2.8)
   svelte:
     specifier: ^4.2.7
     version: 4.2.8
@@ -999,8 +999,8 @@ packages:
       totalist: 3.0.1
     dev: true
 
-  /slider-upper@0.0.4(svelte@4.2.8):
-    resolution: {integrity: sha512-dqHj9to0eUkjkzecqw3UkejTS4GGqXO7DIM9SsQI+vLdiesue7J7t91/Q5RK7natA9zMYMfD3/JohBjdoih55w==}
+  /slider-upper@0.0.5(svelte@4.2.8):
+    resolution: {integrity: sha512-IDH1hKF6ORqcUY3ruqOR7hpTccc1MRFNX6JnvkQukPKz71NzhGe4YuVee0lzqB5s8RsOcrbbGlHo8TOxhxTCFQ==}
     peerDependencies:
       svelte: ^4.0.0
     dependencies:
