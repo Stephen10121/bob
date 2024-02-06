@@ -1,13 +1,16 @@
 <script lang="ts">
-    import Modal from "$lib/Modal.svelte";
-    import { houses } from "$lib/store";
     import HousesSection from "$lib/HousesSection.svelte";
-    import { onMount } from "svelte";
+    import Settings from "$lib/Settings.svelte";
     import { Drawer } from "slider-upper";
-    import Song from "$lib/Song.svelte";
+    import { houses } from "$lib/store";
 
     let addHouseModal = false;
+    let settingsModal = false;
     let newHouseName = "";
+
+    export let data;
+
+    let theme: "light" | "dark" | "system" = data.theme === "lightTheme" ? "light" : data.theme === "darkTheme" ? "dark" : "system";
 
     function addHouse() {
         let arrivalTime = Date.now();
@@ -31,22 +34,12 @@
         window.localStorage.setItem("houses", JSON.stringify($houses));
         console.log("saved");
     }
-
-    onMount(() => {
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(window.localStorage.getItem("houses")!);
-        var dlAnchorElem = document.getElementById('downloadAnchorElem');
-        if (dlAnchorElem) {
-            dlAnchorElem.setAttribute("href", dataStr);
-            dlAnchorElem.setAttribute("download", "houses.json");
-            // dlAnchorElem.click();
-        }
-    });
 </script>
-<a id="downloadAnchorElem">Download Json</a>
-<HousesSection on:addHouse={() => addHouseModal = true} on:save={save} />
+
+<HousesSection {theme} on:settings={() => settingsModal = true} on:addHouse={() => addHouseModal = true} on:save={save} />
 
 {#if addHouseModal}
-    <Drawer on:close={() => addHouseModal=false} showHeaderBar closeDrawer={songClose}>
+    <Drawer {theme} on:close={() => addHouseModal=false} showHeaderBar closeDrawer={songClose} borderColor={theme!="light" ? "#ffffff" : ""}>
     <!-- <Modal on:close={() => addHouseModal=false} header="New House" forceClose={songClose}> -->
         <section>
             <input type="text" placeholder="House Name" bind:value={newHouseName} />
@@ -54,6 +47,11 @@
             <p class="disclaimer">*By adding the house, you set the arrival time as well.</p>
         </section>
     <!-- </Modal> -->
+    </Drawer>
+{/if}
+{#if settingsModal}
+    <Drawer {theme} on:close={() => settingsModal=false} showHeaderBar borderColor={theme!="light" ? "#ffffff" : ""}>
+        <Settings theme={data.theme} />
     </Drawer>
 {/if}
 

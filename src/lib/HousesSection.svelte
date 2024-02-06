@@ -4,14 +4,16 @@
     import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();
+    export let theme: "system" | "light" | "dark";
 </script>
 
 
 <section>
     {#each $houses as house}
-        <AHouse {house} on:save />
+        <AHouse {theme} {house} on:save />
     {/each}
     <button on:click={() => dispatch("addHouse")}>Add house</button>
+    <button on:click={() => dispatch("settings")}>Settings</button>
 </section>
 
 <style>

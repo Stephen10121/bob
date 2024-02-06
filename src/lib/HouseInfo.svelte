@@ -1,10 +1,11 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import Modal from "./Modal.svelte";
+    import { Drawer } from "slider-upper";
     import SongInfo from "./SongInfo.svelte";
     import { houses, type House, type Song } from "./store";
 
     export let houseInfo: House;
+    export let theme: "system" | "light" | "dark";
 
     const dispatch = createEventDispatcher();
     let arrivalTime = new Date(houseInfo.arrival);
@@ -74,13 +75,15 @@
 </section>
 
 {#if addSong}
-    <Modal on:close={() => addSong=false} speedMS={200} header="Add Song" forceClose={songClose}>
-        <section class="addSongSect">
-            <input type="text" placeholder="Song Name" bind:value={newSongName} />
-            <button on:click={addNewSong}>Add Song</button>
-            <p class="disclaimer">*By adding the song, you set the start time as well.</p>
-        </section>
-    </Modal>
+        <Drawer {theme} on:close={() => addSong=false} showHeaderBar borderColor={theme!="light" ? "#ffffff" : ""} closeDrawer={songClose}>
+        <!-- <Modal on:close={() => addSong=false} speedMS={200} header="Add Song" forceClose={songClose}> -->
+            <section class="addSongSect">
+                <input type="text" placeholder="Song Name" bind:value={newSongName} />
+                <button on:click={addNewSong}>Add Song</button>
+                <p class="disclaimer">*By adding the song, you set the start time as well.</p>
+            </section>
+        <!-- </Modal> -->
+        </Drawer>
 {/if}
 
 <style>
