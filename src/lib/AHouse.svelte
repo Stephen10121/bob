@@ -15,9 +15,7 @@
 
 {#if showHouseInfo}
     <Drawer {theme} on:close={() => showHouseInfo=false} showHeaderBar borderColor={theme!="light" ? "#ffffff" : ""}>
-    <!-- <Modal on:close={() => s=false} speedMS={200} header={house.name}> -->
         <HouseInfo {theme} houseInfo={house} on:save />
-    <!-- </Modal> -->
     </Drawer>
 {/if}
 

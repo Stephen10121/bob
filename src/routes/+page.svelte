@@ -42,7 +42,6 @@
         <section>
             <input type="text" placeholder="House Name" bind:value={newHouseName} />
             <button on:click={addHouse}>Add House</button>
-            <p class="disclaimer">*By adding the house, you set the arrival time as well.</p>
         </section>
     <!-- </Modal> -->
     </Drawer>
