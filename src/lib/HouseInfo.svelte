@@ -8,8 +8,26 @@
     export let theme: "system" | "light" | "dark";
 
     const dispatch = createEventDispatcher();
-    let arrivalTime = new Date(houseInfo.arrival);
+    $: arrivalTime = houseInfo.arrival !==0 ? new Date(houseInfo.arrival) : false;
     $: departure = houseInfo.departure ? new Date(houseInfo.departure) : false;
+
+    function setArrival() {
+        let newHouseInfo = houseInfo;
+        let newHouses = [];
+        newHouseInfo.arrival = Date.now();
+
+        for (let i=0;i<$houses.length;i++) {
+            if ($houses[i].name === houseInfo.name) {
+                newHouses.push(newHouseInfo);
+            } else {
+                newHouses.push($houses[i])
+            }
+        }
+
+        $houses = newHouses;
+
+        dispatch("save");
+    }
 
     function setDeparture() {
         let newHouseInfo = houseInfo;
@@ -64,8 +82,8 @@
 <section>
     <ul>
         <li>Name: {houseInfo.name}</li>
-        <li>Arrival: {arrivalTime}</li>
-        <li>Departure: {departure==false ? "Not Set" : departure} {#if departure===false}<span class="right"><button on:click={setDeparture}>Set Departure</button></span>{/if}</li>
+        <li>Arrival: {arrivalTime === false ? "Not Set": arrivalTime} {#if arrivalTime === false}<span class="right"><button on:click={setArrival}>Set Arrival</button></span>{/if}</li>
+        <li>Departure: {departure===false ? "Not Set" : departure} {#if departure===false}<span class="right"><button on:click={setDeparture}>Set Departure</button></span>{/if}</li>
         <li>Songs <span class="right"><button on:click={() => addSong=true}>Add Song</button></span>
             <span>
                 <SongInfo house={houseInfo} on:save />

@@ -13,10 +13,8 @@
     let theme: "light" | "dark" | "system" = data.theme === "lightTheme" ? "light" : data.theme === "darkTheme" ? "dark" : "system";
 
     function addHouse() {
-        let arrivalTime = Date.now();
-
         $houses.push({
-            arrival: arrivalTime,
+            arrival: 0,
             name: newHouseName,
             songs: [],
             departure: undefined

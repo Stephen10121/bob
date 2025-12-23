@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Drawer } from "slider-upper";
     import HouseInfo from "./HouseInfo.svelte";
-    import Modal from "./Modal.svelte";
     import type { House } from "./store";
 
     export let house: House;
