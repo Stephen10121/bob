@@ -93,15 +93,12 @@
 </section>
 
 {#if addSong}
-        <Drawer {theme} on:close={() => addSong=false} showHeaderBar borderColor={theme!="light" ? "#ffffff" : ""} closeDrawer={songClose}>
-        <!-- <Modal on:close={() => addSong=false} speedMS={200} header="Add Song" forceClose={songClose}> -->
-            <section class="addSongSect">
-                <input type="text" placeholder="Song Name" bind:value={newSongName} />
-                <button on:click={addNewSong}>Add Song</button>
-                <p class="disclaimer">*By adding the song, you set the start time as well.</p>
-            </section>
-        <!-- </Modal> -->
-        </Drawer>
+    <Drawer {theme} on:close={() => addSong=false} showHeaderBar borderColor={theme!="light" ? "#ffffff" : ""} closeDrawer={songClose}>
+        <section class="addSongSect">
+            <input type="text" placeholder="Song Name" bind:value={newSongName} />
+            <button on:click={addNewSong}>Add Song</button>
+        </section>
+    </Drawer>
 {/if}
 
 <style>
@@ -178,13 +175,6 @@
         background-color: var(--accent);
         padding: 7px 5px;
         border-radius: 5px;
-        color: var(--text);
-    }
-
-    .addSongSect .disclaimer {
-        font-family: var(--font);
-        font-size: 0.8rem;
-        font-style: italic;
         color: var(--text);
     }
 </style>

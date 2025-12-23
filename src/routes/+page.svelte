@@ -38,12 +38,10 @@
 
 {#if addHouseModal}
     <Drawer {theme} on:close={() => addHouseModal=false} showHeaderBar closeDrawer={songClose} borderColor={theme!="light" ? "#ffffff" : ""}>
-    <!-- <Modal on:close={() => addHouseModal=false} header="New House" forceClose={songClose}> -->
         <section>
             <input type="text" placeholder="House Name" bind:value={newHouseName} />
             <button on:click={addHouse}>Add House</button>
         </section>
-    <!-- </Modal> -->
     </Drawer>
 {/if}
 {#if settingsModal}
@@ -53,10 +51,6 @@
 {/if}
 
 <style>
-    p {
-        font-family: var(--font);
-    }
-
     section {
         width: 100%;
         height: 100%;
@@ -90,13 +84,6 @@
         background-color: var(--accent);
         padding: 7px 5px;
         border-radius: 5px;
-        color: var(--text);
-    }
-
-    .disclaimer {
-        font-family: var(--font);
-        font-size: 0.8rem;
-        font-style: italic;
         color: var(--text);
     }
 </style>
