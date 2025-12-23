@@ -2,11 +2,12 @@ import { writable } from "svelte/store";
 
 export type Song = {
     name: string,
-    startSinging: number,
+    startSinging: number | undefined,
     endSinging: number | undefined
 }
 
 export type House = {
+    id: string,
     name: string,
     arrival: number,
     departure: number | undefined

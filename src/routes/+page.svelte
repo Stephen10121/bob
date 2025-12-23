@@ -17,7 +17,8 @@
             arrival: 0,
             name: newHouseName,
             songs: [],
-            departure: undefined
+            departure: undefined,
+            id: crypto.randomUUID()
         });
 
         $houses = $houses;

@@ -8,6 +8,36 @@
 
     const dispatch = createEventDispatcher();
     $: stopSinging = song.endSinging ? new Date(song.endSinging) : false;
+    $: startSingins = song.startSinging ? new Date(song.startSinging) : false;
+
+    function setSongStart() {
+        let newSong = song;
+        newSong.startSinging = Date.now();
+
+        let newHouseInfo = house;
+        let newHouseSongs = [];
+
+        for (let i=0;i<newHouseInfo.songs.length;i++) {
+            if (newHouseInfo.songs[i].name === newSong.name) {
+                newHouseSongs.push(newSong);
+            } else {
+                newHouseSongs.push(newHouseInfo.songs[i]);
+            }
+        }
+
+        newHouseInfo.songs = newHouseSongs;
+        let newHouses = [];
+        for (let i=0;i<$houses.length;i++) {
+            if ($houses[i].name === newHouseInfo.name) {
+                newHouses.push(newHouseInfo);
+            } else {
+                newHouses.push($houses[i])
+            }
+        }
+
+        $houses = newHouses;
+        dispatch("save");
+    }
     
     function setSongDone() {
         let newSong = song;
@@ -41,7 +71,7 @@
 <li>
     {song.name}
     <ul>
-        <li>Start Time: {new Date(song.startSinging)}</li>
+        <li>Start Time: {startSingins==false ? "Not Set" : startSingins} {#if startSingins===false}<span class="right"><button on:click={setSongStart}>Set Start Time</button></span>{/if}</li>
         <li>Stop Time: {stopSinging==false ? "Not Set" : stopSinging} {#if stopSinging===false}<span class="right"><button on:click={setSongDone}>Set End Time</button></span>{/if}</li>
     </ul>
 </li>

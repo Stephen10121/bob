@@ -11,6 +11,19 @@
     $: arrivalTime = houseInfo.arrival !==0 ? new Date(houseInfo.arrival) : false;
     $: departure = houseInfo.departure ? new Date(houseInfo.departure) : false;
 
+    function deleteHouse() {
+        let newHouses = [];
+        for (let i=0;i<$houses.length;i++) {
+            if ($houses[i].id !== houseInfo.id) {
+                newHouses.push($houses[i]);
+            }
+        }
+
+        $houses = newHouses;
+
+        dispatch("save");
+    }
+
     function setArrival() {
         let newHouseInfo = houseInfo;
         let newHouses = [];
@@ -53,7 +66,7 @@
     function addNewSong() {
         let newSong: Song = {
             name: newSongName,
-            startSinging: Date.now(),
+            startSinging: undefined,
             endSinging: undefined
         }
 
@@ -81,7 +94,7 @@
 
 <section>
     <ul>
-        <li>Name: {houseInfo.name}</li>
+        <li>Name: {houseInfo.name} <span class="right"><button on:click={deleteHouse}>Delete House</button></li>
         <li>Arrival: {arrivalTime === false ? "Not Set": arrivalTime} {#if arrivalTime === false}<span class="right"><button on:click={setArrival}>Set Arrival</button></span>{/if}</li>
         <li>Departure: {departure===false ? "Not Set" : departure} {#if departure===false}<span class="right"><button on:click={setDeparture}>Set Departure</button></span>{/if}</li>
         <li>Songs <span class="right"><button on:click={() => addSong=true}>Add Song</button></span>
