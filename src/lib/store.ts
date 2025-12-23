@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 
 export type Song = {
+    id: string,
     name: string,
     startSinging: number | undefined,
     endSinging: number | undefined

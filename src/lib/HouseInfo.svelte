@@ -65,6 +65,7 @@
 
     function addNewSong() {
         let newSong: Song = {
+            id: crypto.randomUUID(),
             name: newSongName,
             startSinging: undefined,
             endSinging: undefined

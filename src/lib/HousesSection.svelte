@@ -7,7 +7,6 @@
     export let theme: "system" | "light" | "dark";
 </script>
 
-
 <section>
     {#each $houses as house}
         <AHouse {theme} {house} on:save />
