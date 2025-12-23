@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher, onMount } from "svelte";
+    import { createEventDispatcher } from "svelte";
     import type { House, Song } from "./store";
     import { houses } from "./store";
 
