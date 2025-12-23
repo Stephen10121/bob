@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import type { Themes } from "../routes/+layout.server";
+    import { houses } from "./store";
 
     export let theme: Themes;
 
@@ -18,15 +19,63 @@
             // dlAnchorElem.click();
         }
     });
+
+    function jsonUploaded(event: any) {
+        try {
+            const files = event.target.files;
+
+            if (files.length === 0) return;
+
+            const jsonFile = files[0];
+
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                // The file content is in event.target.result
+                const fileContent = event.target?.result;
+
+                if (!fileContent) return
+
+                try {
+                    // If the file content is already a valid JSON *string*, 
+                    // you can parse it into a JavaScript object.
+                    const jsObject = JSON.parse(fileContent);
+
+                    $houses = jsObject;
+                    window.localStorage.setItem("houses", JSON.stringify(jsObject));
+
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+
+            // Read the file content as text
+            reader.readAsText(jsonFile);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 </script>
 
 <a id="downloadAnchorElem">Download Json</a>
+<br>
 <select on:change={themeChange} title="Choose theme">
     <!-- excuse the ugly code -->
     <option value="darkTheme" selected={theme==="darkTheme"}>Dark</option>
     <option value="lightTheme" selected={theme==="lightTheme"}>Light</option>
     <option value="systemTheme" selected={theme==="systemTheme"}>System</option>
 </select>
+<br>
+<label for="uploadjson">
+    Upload JSON
+</label>
+<input
+    type="file"
+    name="uploadjson"
+    id="uploadjson"
+    accept="application/json,.json"
+    on:change={jsonUploaded}
+/>
 
 
 <style>
