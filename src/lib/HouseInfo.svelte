@@ -6,10 +6,15 @@
 
     export let houseInfo: House;
     export let theme: "system" | "light" | "dark";
+let diff =0;
 
     const dispatch = createEventDispatcher();
     $: arrivalTime = houseInfo.arrival !==0 ? new Date(houseInfo.arrival) : false;
     $: departure = houseInfo.departure ? new Date(houseInfo.departure) : false;
+
+    $: {
+        if (arrivalTime && departure) diff = (departure - arrivalTime) / 60000;
+    }
 
     function deleteHouse() {
         let newHouses = [];
@@ -98,6 +103,7 @@
         <li>Name: {houseInfo.name} <span class="right"><button on:click={deleteHouse}>Delete House</button></li>
         <li>Arrival: {arrivalTime === false ? "Not Set": arrivalTime} {#if arrivalTime === false}<span class="right"><button on:click={setArrival}>Set Arrival</button></span>{/if}</li>
         <li>Departure: {departure===false ? "Not Set" : departure} {#if departure===false}<span class="right"><button on:click={setDeparture}>Set Departure</button></span>{/if}</li>
+{#if diff>0}<li>Minutes spent: {diff}</li>{/if}
         <li>Songs <span class="right"><button on:click={() => addSong=true}>Add Song</button></span>
             <span>
                 <SongInfo house={houseInfo} on:save />
